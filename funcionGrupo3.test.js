@@ -4,7 +4,7 @@ describe('calcularIGV - Grupo 3 - TDD Tests', () => {
 
   test('debe calcular el IGV del 18% sobre un monto válido', () => {
     const resultado = calcularIGV(100);
-    expect(resultado).toBe(18);
+    expect(resultado).toBe(90);
   });
 
   test('debe calcular el IGV sobre 1000', () => {

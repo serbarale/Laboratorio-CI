@@ -1,11 +1,34 @@
-function calcularTotalPedido(productos, descuento) {
- if (!Array.isArray(productos) || productos.length === 0)
-  return "Error: no hay productos en el pedido";
+function calcularTotalPedido(pedido, descuento = 0) {
+  if (!Array.isArray(pedido)) {
+    return "Error: pedido inválido";
+  }
 
- const subtotal = productos.reduce((acc, p) => acc + p.precio * p.cantidad, 0);
- if (subtotal <= 0) return "Error: monto inválido";
- 
- const total = subtotal - subtotal * (descuento / 100);
- return total;
+  if (pedido.length === 0) {
+    return "Error: no hay productos en el pedido";
+  }
+
+  if (typeof descuento !== 'number' || descuento < 0 || descuento > 100) {
+    return "Error: descuento inválido";
+  }
+
+  let subtotal = 0;
+  for (let item of pedido) {
+    if (!item || typeof item.precio !== 'number' || typeof item.cantidad !== 'number') {
+      return "Error: producto inválido en el pedido";
+    }
+
+    if (item.precio < 0 || item.cantidad < 0) {
+      return "Error: precio o cantidad negativa";
+    }
+
+    subtotal += item.precio * item.cantidad;
+  }
+
+  if (descuento > 0) {
+    subtotal = subtotal * (1 - descuento / 100);
+  }
+
+  return subtotal;
 }
+
 module.exports = { calcularTotalPedido };

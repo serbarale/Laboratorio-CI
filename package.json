@@ -1,0 +1,17 @@
+{
+  "name": "taller-tdd-pedidos",
+  "version": "1.0.0",
+  "description": "Taller 3 - Test-Driven Development",
+  "main": "pedido.js",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
+  },
+  "keywords": ["tdd", "testing", "jest"],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}

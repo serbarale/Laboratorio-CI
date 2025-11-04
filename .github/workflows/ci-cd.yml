@@ -1,0 +1,36 @@
+name: CI/CD Simple
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar repositorio
+        uses: actions/checkout@v3
+
+      - name: Instalar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Instalar dependencias
+        run: npm install
+
+      - name: Darle Permisos a Jest
+        run: chmod +x ./node_modules/.bin/jest
+
+      - name: Ejecutar pruebas unitarias
+        run: npm test funcionGrupo3.test.js
+
+      - name: Ejecutar pruebas de integracion
+        run: npm test integracion.test.js
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Simular despliegue
+        run: echo "Desplegando aplicación..."
+
